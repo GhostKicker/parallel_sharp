@@ -1,0 +1,6 @@
+C:\Users\User\Documents\Visual Studio 2017\Projects\parallel_sharp\pi\bin\Debug\pi.exe.config
+C:\Users\User\Documents\Visual Studio 2017\Projects\parallel_sharp\pi\bin\Debug\pi.exe
+C:\Users\User\Documents\Visual Studio 2017\Projects\parallel_sharp\pi\bin\Debug\pi.pdb
+C:\Users\User\Documents\Visual Studio 2017\Projects\parallel_sharp\pi\obj\Debug\pi.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\Visual Studio 2017\Projects\parallel_sharp\pi\obj\Debug\pi.exe
+C:\Users\User\Documents\Visual Studio 2017\Projects\parallel_sharp\pi\obj\Debug\pi.pdb
