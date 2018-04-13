@@ -1,6 +1,0 @@
-c:\users\user\documents\visual studio 2017\Projects\parallel_sharp\lab2\obj\Debug\lab2.csprojResolveAssemblyReference.cache
-c:\users\user\documents\visual studio 2017\Projects\parallel_sharp\lab2\bin\Debug\lab2.exe.config
-c:\users\user\documents\visual studio 2017\Projects\parallel_sharp\lab2\bin\Debug\lab2.exe
-c:\users\user\documents\visual studio 2017\Projects\parallel_sharp\lab2\bin\Debug\lab2.pdb
-c:\users\user\documents\visual studio 2017\Projects\parallel_sharp\lab2\obj\Debug\lab2.exe
-c:\users\user\documents\visual studio 2017\Projects\parallel_sharp\lab2\obj\Debug\lab2.pdb
