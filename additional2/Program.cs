@@ -76,7 +76,7 @@ namespace additional2
 
         static double f(double x)
         {
-            return Math.Sin(2 * x) + Math.Cos(3 * x);
+            return Math.Cos(2 * x) + Math.Sin(3 * x);
         }
 
         static int sign(double a, double b)

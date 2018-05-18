@@ -9,15 +9,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace lab2
+namespace lab2Additional1
 {
     class Program
     {
-
-        static double[,] semi_result;
+        //static double[,] semi_result;
+        static Task<double>[,] semi_result;
         static double[,] matrix;
-        static string readfrom = @"C:\Users\User\Documents\visual studio 2017\Projects\parallel_sharp\lab2\matrix.csv";
-        static string writeto = @"C:\Users\User\Documents\visual studio 2017\Projects\parallel_sharp\lab2\result.csv";
+        static string readfrom = @"C:\Users\User\Documents\visual studio 2017\Projects\parallel_sharp\lab2Additional1\matrix.csv";
+        static string writeto = @"C:\Users\User\Documents\visual studio 2017\Projects\parallel_sharp\lab2Additional1\result.csv";
 
         static void Main(string[] args)
         {
@@ -28,7 +28,8 @@ namespace lab2
             string[] string_matrix = File.ReadAllLines(readfrom);
             int le = string_matrix.Length;
             matrix = new double[le, le];
-            semi_result = new double[le, le];
+            //semi_result = new double[le, le];
+            semi_result = new Task<double>[le, le];
             int i_m = 0;
             foreach (string line in string_matrix)
             {
@@ -47,10 +48,19 @@ namespace lab2
             //calculating the stuff
             for (int i = 0; i < le; i++)
             {
-                Parallel.For(0, le, (j) =>
+                for (int j = 0; j < le; j++)
                 {
-                    semi_result[i, j] = calc(i, j, le);
-                });
+                    Tuple<int, int, int> cur = new Tuple<int, int, int>(i, j, le);
+                    semi_result[i, j] = new Task<double>((x) => calc((Tuple<int,int,int>)x), cur);
+                    semi_result[i, j].Start();
+                }
+            }
+            for (int i = 0; i < le; i++)
+            {
+                for (int j = 0; j < le; j++)
+                {
+                    semi_result[i, j].Wait();
+                }
                 if (i % 50 == 0)
                     Console.WriteLine("Calculated " + i.ToString() + "-th row");
             }
@@ -69,13 +79,14 @@ namespace lab2
             Console.WriteLine("wrote result successfully");
             //-------------------
             stop.Stop();
-            Console.WriteLine("Time is " + stop.ElapsedMilliseconds.ToString() + " millis parfor");
-
-
+            Console.WriteLine("Time is " + stop.ElapsedMilliseconds.ToString() + " millis task");
         }
 
-        static double calc(int i, int j, int L) //calculating [i,j]-th cell of matrix
+        static double calc(Tuple<int, int, int> cur) //calculating [i,j]-th cell of matrix
         {
+            int i = cur.Item1;
+            int j = cur.Item2;
+            int L = cur.Item3;
             double res = 0;
             for (int k = 0; k < L; k++)
             {
@@ -84,12 +95,12 @@ namespace lab2
             return res;
         }
 
-        static string numstostr(int row, int L, ref double[,] m)// i-th row of matrix into string
+        static string numstostr(int row, int L, ref Task<double>[,] m)// i-th row of matrix into string
         {
             string res = m[row, 0].ToString();
             for (int i = 1; i < L; i++)
             {
-                res += "," + m[row, i];
+                res += "," + m[row, i].Result;
             }
             return res;
         }
